@@ -18,7 +18,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 class APIConstants {
   static const String OCTET_STREAM_ENCODING = "application/octet-stream";
-  static const String API_BASE_URL = "http://192.168.0.10:8888/phpbackend/index.php";
+  static const String API_BASE_URL =
+      "http://192.168.43.156/phpBackend/index.php";
+  static const String API_EDIT_STUDENT =
+      "http://192.168.43.156/phpBackend/edit.php";
+  static const String API_GET_STUDENTS =
+      "http://192.168.43.156/phpBackend/read.php";
+  static const String API_ADD_STUDENTS =
+      "http://192.168.43.156/phpBackend/add.php";
+  static const String API_DELETE_STUDENT =
+      "http://192.168.43.156/phpBackend/delete.php";
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -11,6 +11,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.12.0
 
+module:
+  androidX: true # Add this line.
+
 flutter_icons:
   image_path: "assets/images/logo.png"
   android: true
@@ -23,12 +26,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 flutter:
-
   uses-material-design: true
 
   assets:
-    - assets/images/logo.png
-    - assets/images/logospu.png
-    - assets/images/ic_launcher.png
+    - assets/images/
+    - assets/images/
+    - assets/images/

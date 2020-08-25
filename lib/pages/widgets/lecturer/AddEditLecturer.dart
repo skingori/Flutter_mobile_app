@@ -21,8 +21,11 @@ class _AddEditPageState extends State<AddEditPage> {
 
   addUpdateData() {
     if (editMode) {
-      var url = APIConstants.API_EDIT_STUDENT;
+      var url = APIConstants.API_EDIT_LECTURER;
+      var map = new Map<String, dynamic>();
+      map["action"] = "HELLO";
       http.post(url, body: {
+        'action': map,
         'id': widget.list[widget.index]['Lecturer_ID'],
         'fistname': firstName.text,
         'lastname': lastName.text,
@@ -30,7 +33,7 @@ class _AddEditPageState extends State<AddEditPage> {
         'email': email.text,
       });
     } else {
-      var url = APIConstants.API_ADD_STUDENTS;
+      var url = APIConstants.API_ADD_LECTURERS;
       http.post(url, body: {
         'fistname': firstName.text,
         'lastname': lastName.text,
@@ -114,7 +117,7 @@ class _AddEditPageState extends State<AddEditPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(16.0),
             child: RaisedButton(
               onPressed: () {
                 setState(() {
@@ -126,9 +129,10 @@ class _AddEditPageState extends State<AddEditPage> {
                     builder: (context) => HomePage(),
                   ),
                 );
+
                 debugPrint('Clicked RaisedButton Button');
               },
-              color: Colors.blue,
+              color: Colors.redAccent,
               child: Text(
                 editMode ? 'Update' : 'Save',
                 style: TextStyle(color: Colors.white),

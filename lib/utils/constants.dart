@@ -18,16 +18,29 @@
 ///////////////////////////////////////////////////////////////////////////////
 class APIConstants {
   static const String OCTET_STREAM_ENCODING = "application/octet-stream";
-  static const String API_BASE_URL =
-      "http://192.168.43.156/phpBackend/index.php";
-  static const String API_EDIT_STUDENT =
-      "http://192.168.43.156/phpBackend/edit.php";
-  static const String API_GET_STUDENTS =
-      "http://192.168.43.156/phpBackend/read.php";
-  static const String API_ADD_STUDENTS =
-      "http://192.168.43.156/phpBackend/add.php";
-  static const String API_DELETE_STUDENT =
-      "http://192.168.43.156/phpBackend/delete.php";
+  static const String API_BASE_URL = "http://192.168.0.12/phpBackend/index.php";
+  static const String API_EDIT_LECTURER =
+      "http://192.168.0.12/phpBackend/edit.php";
+  static const String API_GET_LECTURERS =
+      "http://192.168.0.12/phpBackend/read.php";
+  static const String API_ADD_LECTURERS =
+      "http://192.168.0.12/phpBackend/add.php";
+  static const String API_DELETE_LECTURER =
+      "http://192.168.0.12/phpBackend/delete.php";
+
+//  STUDENTS
+  static const String STUDENT_ROOT = "http://192.168.0.12/phpBackend/students_all.php";
+  static const String STUDENT_EDIT_ACTION = "EDIT_STUDENT";
+  static const String STUDENTS_GET_ACTION = "GET_STUDENTS";
+  static const String STUDENTS_ADD_ACTION = "ADD_STUDENT";
+  static const String STUDENT_DELETE = "DELETE_STUDENT";
+
+//  Courses
+  static const String COURSE_ROOT = "http://192.168.0.12/phpBackend/courses_all.php";
+  static const String COURSE_EDIT_ACTION = "EDIT_COURSE";
+  static const String COURSE_GET_ACTION = "GET_COURSE";
+  static const String COURSE_ADD_ACTION = "ADD_COURSE";
+  static const String COURSE_DELETE = "DELETE_COURSE";
 }
 
 ///////////////////////////////////////////////////////////////////////////////

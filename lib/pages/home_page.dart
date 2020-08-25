@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:StPaulUniversity/pages/splash_page.dart';
+import 'package:StPaulUniversity/pages/widgets/lsstudents/all_students.dart';
 import 'package:flutter/material.dart';
 //import 'package:StPaulUniversity/customviews/progress_dialog.dart';
 //import 'package:StPaulUniversity/futures/app_futures.dart';
@@ -9,7 +10,9 @@ import 'package:StPaulUniversity/models/User.dart';
 //import 'package:StPaulUniversity/models/base/EventObject.dart';
 import 'package:StPaulUniversity/utils/app_shared_preferences.dart';
 import 'package:StPaulUniversity/utils/constants.dart';
-import 'package:StPaulUniversity/pages/widgets/AddEditPage.dart';
+import 'package:StPaulUniversity/pages/widgets/lecturer/AddEditLecturer.dart';
+import 'package:StPaulUniversity/pages/widgets/student/StudentsTable.dart';
+import 'package:StPaulUniversity/pages/widgets/lsscourses/all_courses.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -22,12 +25,6 @@ class _HomePageState extends State<HomePage> {
   final globalKey = new GlobalKey<ScaffoldState>();
 
   User user;
-
-  TextEditingController oldPasswordController =
-      new TextEditingController(text: "");
-
-  TextEditingController newPasswordController =
-      new TextEditingController(text: "");
 
 //------------------------------------------------------------------------------
 
@@ -42,7 +39,7 @@ class _HomePageState extends State<HomePage> {
 //  ----------------------------------------------------------------------------
   Future getData() async {
     try {
-      var url = APIConstants.API_GET_STUDENTS;
+      var url = APIConstants.API_GET_LECTURERS;
       var response = await http.get(url).timeout(
         Duration(seconds: 25),
         onTimeout: () {
@@ -103,28 +100,21 @@ class _HomePageState extends State<HomePage> {
                 trailing: new Icon(Icons.supervised_user_circle),
                 onTap: () {
                   Navigator.of(context).pop();
-//                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Page("First Page")));
-                }),
-            new ListTile(
-                title: new Text("Lectures"),
-                trailing: new Icon(Icons.folder_open),
-                onTap: () {
-                  Navigator.of(context).pop();
-//                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Page("Second Page")));
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new AllStudents()));
                 }),
             new ListTile(
                 title: new Text("Courses"),
                 trailing: new Icon(Icons.library_books),
                 onTap: () {
                   Navigator.of(context).pop();
-//                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Page("Second Page")));
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new AllCourses()));
                 }),
             new ListTile(
                 title: new Text("Assignments"),
-                trailing: new Icon(Icons.assignment_return),
+                trailing: new Icon(Icons.assignment),
                 onTap: () {
                   Navigator.of(context).pop();
-//                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Page("Second Page")));
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new DataTableDemo()));
                 }),
             new Divider(),
             new ListTile(
@@ -187,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(Icons.delete),
                         onTap: () {
                           setState(() {
-                            var url = APIConstants.API_DELETE_STUDENT;
+                            var url = APIConstants.API_DELETE_LECTURER;
                             http.post(url, body: {
                               'id': list[index]['Lecturer_ID'],
                             });

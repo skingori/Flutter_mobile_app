@@ -1,48 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:StPaulUniversity/utils/constants.dart';
+import 'package:StPaulUniversity/pages/widgets/lsunit/all_units.dart';
 
-import 'all_students.dart';
-
-class AddEditPageStudents extends StatefulWidget {
+class AddEditPageUnits extends StatefulWidget {
   final List list;
   final int index;
 
-  AddEditPageStudents({this.list, this.index});
+  AddEditPageUnits({this.list, this.index});
 
   @override
   _AddEditPageState createState() => _AddEditPageState();
 }
 
-class _AddEditPageState extends State<AddEditPageStudents> {
-  TextEditingController firstName = TextEditingController();
-  TextEditingController lastName = TextEditingController();
-  TextEditingController stdnumber = TextEditingController();
-  TextEditingController gender = TextEditingController();
-
-  var items = ['Male', 'Female', 'Other'];
+class _AddEditPageState extends State<AddEditPageUnits> {
+  TextEditingController Unit_Code= TextEditingController();
+  TextEditingController Unit_Name= TextEditingController();
+  TextEditingController Unit_Description= TextEditingController();
 
   bool editMode = false;
 
   addUpdateData() {
     if (editMode) {
-      var url = APIConstants.STUDENT_ROOT;
+      var url = APIConstants.UNIT_ROOT;
       var map = new Map<String, dynamic>();
-      map["action"] = APIConstants.STUDENT_EDIT_ACTION;
-      map["id"] = widget.list[widget.index]['Student_ID'];
-      map["fistname"] = firstName.text;
-      map["lastname"] = lastName.text;
-      map["stdnumber"] = stdnumber.text;
-      map["gender"] = gender.text;
+      map["action"] = APIConstants.UNIT_EDIT_ACTION;
+      map["id"] = widget.list[widget.index]['Unit_ID'];
+      map["Unit_Code"] = Unit_Code.text;
+      map["Unit_Name"] = Unit_Name.text;
+      map["Unit_Description"] = Unit_Description.text;
+
       http.post(url, body: map);
+
     } else {
-      var url = APIConstants.STUDENT_ROOT;
+      var url = APIConstants.UNIT_ROOT;
       var map = new Map<String, dynamic>();
-      map["action"] = APIConstants.STUDENTS_ADD_ACTION;
-      map["fistname"] = firstName.text;
-      map["lastname"] = lastName.text;
-      map["stdnumber"] = stdnumber.text;
-      map["gender"] = gender.text;
+      map["action"] = APIConstants.UNIT_ADD_ACTION;
+      map["Unit_Code"] = Unit_Code.text;
+      map["Unit_Name"] = Unit_Name.text;
+      map["Unit_Description"] = Unit_Description.text;
       http.post(url, body: map);
     }
   }
@@ -52,10 +48,9 @@ class _AddEditPageState extends State<AddEditPageStudents> {
     super.initState();
     if (widget.index != null) {
       editMode = true;
-      firstName.text = widget.list[widget.index]['Student_FirstName'];
-      lastName.text = widget.list[widget.index]['Student_LastName'];
-      stdnumber.text = widget.list[widget.index]['Student_AdmissionNumber'];
-      gender.text = widget.list[widget.index]['Student_Gender'];
+      Unit_Code.text = widget.list[widget.index]['Unit_Code'];
+      Unit_Name.text = widget.list[widget.index]['Unit_Name'];
+      Unit_Description.text = widget.list[widget.index]['Unit_Description'];
     }
   }
 
@@ -63,7 +58,7 @@ class _AddEditPageState extends State<AddEditPageStudents> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(editMode ? 'Update' : 'Add Student'),
+        title: Text(editMode ? 'Update' : 'Add Unit'),
         backgroundColor: Colors.redAccent,
       ),
       body: ListView(
@@ -71,66 +66,45 @@ class _AddEditPageState extends State<AddEditPageStudents> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
-              controller: firstName,
+              controller: Unit_Name,
               decoration: InputDecoration(
                 border: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(25.0),
                   borderSide: new BorderSide(),
                 ),
-                labelText: 'First Name',
+                labelText: 'Unit Name',
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
-              controller: lastName,
+              controller: Unit_Code,
               decoration: InputDecoration(
                 border: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(25.0),
                   borderSide: new BorderSide(),
                 ),
-                labelText: 'Last Name',
+                labelText: 'Unit Code',
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
-              controller: stdnumber,
+              maxLines: 5,
+              keyboardType: TextInputType.multiline,
+              controller: Unit_Description,
               decoration: InputDecoration(
                 border: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(25.0),
                   borderSide: new BorderSide(),
                 ),
-                labelText: 'Admission Number',
+                labelText: 'Description',
               ),
             ),
           ),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: gender,
-                decoration: InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(25.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  labelText: 'Gender',
-                  suffixIcon: PopupMenuButton<String>(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    onSelected: (String value) {
-                      gender.text = value;
-                    },
-                    itemBuilder: (BuildContext context) {
-                      return items.map<PopupMenuItem<String>>((String value) {
-                        return new PopupMenuItem(
-                            child: new Text(value), value: value);
-                      }).toList();
-                    },
-                  ),
-                ),
-              )),
+
           Padding(
             padding: EdgeInsets.all(16.0),
             child: RaisedButton(
@@ -141,7 +115,7 @@ class _AddEditPageState extends State<AddEditPageStudents> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AllStudents(),
+                    builder: (context) => AllUnits(),
                   ),
                 );
 
@@ -155,6 +129,7 @@ class _AddEditPageState extends State<AddEditPageStudents> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
+
           ),
         ],
       ),

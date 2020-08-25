@@ -1,28 +1,35 @@
 import 'dart:convert';
 
-import 'package:StPaulUniversity/pages/home_page.dart';
-import 'package:StPaulUniversity/pages/widgets/lsstudents/AddEditStudents.dart';
+import 'package:StPaulUniversity/pages/widgets/lsunit/all_units.dart';
+import 'package:StPaulUniversity/pages/widgets/unitstudent/AddEditStudentUnit.dart';
 import 'package:StPaulUniversity/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class AllStudents extends StatefulWidget {
-  final String title = "Students";
+class AllStudentUnit extends StatefulWidget {
+  final String title = "Registered students";
+
+  final List list;
+  final int index;
+
+  AllStudentUnit({this.list, this.index});
   @override
-  _AllStudentsState createState() => _AllStudentsState();
+  _AllStudentUnitState createState() => _AllStudentUnitState();
 }
 
-class _AllStudentsState extends State<AllStudents> {
+class _AllStudentUnitState extends State<AllStudentUnit> {
   Future getData() async {
     try {
-      var url = APIConstants.STUDENT_ROOT;
+      var url = APIConstants.STUDENT_UNIT_ROOT;
       var map = new Map<String, dynamic>();
-      map['action'] = APIConstants.STUDENTS_GET_ACTION;
+      map['action'] = APIConstants.STUDENT_UNIT_GET_ACTION;
+      map['id'] = widget.list[widget.index]['Unit_ID'];
+      debugPrint(widget.list[widget.index]['Unit_ID']);
       var response = await http.post(url, body: map).timeout(
         Duration(seconds: 20),
         onTimeout: () {
           // time has run out, do what you wanted to do
-          return;
+          return null;
         },
       );
       return json.decode(response.body);
@@ -40,10 +47,10 @@ class _AllStudentsState extends State<AllStudents> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
               Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => new HomePage()));
+                  builder: (BuildContext context) => new AllUnits()));
             },
           ),
         ],
@@ -60,42 +67,18 @@ class _AllStudentsState extends State<AllStudents> {
                 List list = snapshot.data;
                 return ListTile(
                   leading: GestureDetector(
-                    child: Icon(Icons.edit),
-                    onLongPress: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddEditPageStudents(
-                            list: list,
-                            index: index,
-                          ),
-                        ),
-                      );
-                      debugPrint("get the student units");
-                    },
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddEditPageStudents(
-                            list: list,
-                            index: index,
-                          ),
-                        ),
-                      );
-                      debugPrint('Edit Clicked');
-                    },
+                    child: Icon(Icons.account_circle),
                   ),
-                  title: Text(list[index]['Student_FirstName']),
-                  subtitle: Text(list[index]['Student_LastName']),
+                  title: Text(list[index]['Unit_Student_Student_ID']),
+                  subtitle: Text(list[index]['Unit_Student_Unit_ID']),
                   trailing: GestureDetector(
                     child: Icon(Icons.delete),
                     onTap: () {
                       setState(() {
                         var map = new Map<String, dynamic>();
-                        map['action'] = APIConstants.STUDENT_DELETE;
-                        map['id'] = list[index]['Student_ID'];
-                        var url = APIConstants.STUDENT_ROOT;
+                        map['action'] = APIConstants.STUDENT_UNIT_DELETE_ACTION;
+                        map['id'] = list[index]['Unit_Student_ID'];
+                        var url = APIConstants.STUDENT_UNIT_ROOT;
                         http.post(url, body:map);
                       });
 
@@ -120,7 +103,7 @@ class _AllStudentsState extends State<AllStudents> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddEditPageStudents(),
+              builder: (context) => AddEditPageStudentUnit(),
             ),
           );
           debugPrint('Clicked FloatingActionButton Button');

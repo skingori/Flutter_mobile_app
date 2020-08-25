@@ -22,10 +22,7 @@ class _AddEditPageState extends State<AddEditPage> {
   addUpdateData() {
     if (editMode) {
       var url = APIConstants.API_EDIT_LECTURER;
-      var map = new Map<String, dynamic>();
-      map["action"] = "HELLO";
       http.post(url, body: {
-        'action': map,
         'id': widget.list[widget.index]['Lecturer_ID'],
         'fistname': firstName.text,
         'lastname': lastName.text,

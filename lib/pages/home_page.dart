@@ -11,8 +11,9 @@ import 'package:StPaulUniversity/models/User.dart';
 import 'package:StPaulUniversity/utils/app_shared_preferences.dart';
 import 'package:StPaulUniversity/utils/constants.dart';
 import 'package:StPaulUniversity/pages/widgets/lecturer/AddEditLecturer.dart';
-import 'package:StPaulUniversity/pages/widgets/student/StudentsTable.dart';
 import 'package:StPaulUniversity/pages/widgets/lsscourses/all_courses.dart';
+import 'package:StPaulUniversity/pages/widgets/lssassignments/all_assignments.dart';
+import 'package:StPaulUniversity/pages/widgets/lsunit/all_units.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -110,11 +111,18 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new AllCourses()));
                 }),
             new ListTile(
+                title: new Text("Units"),
+                trailing: new Icon(Icons.book),
+                onTap: () {
+                  Navigator.of(context).pop();
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new AllUnits()));
+                }),
+            new ListTile(
                 title: new Text("Assignments"),
                 trailing: new Icon(Icons.assignment),
                 onTap: () {
                   Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new DataTableDemo()));
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new AllAssignments()));
                 }),
             new Divider(),
             new ListTile(

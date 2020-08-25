@@ -41,6 +41,29 @@ class APIConstants {
   static const String COURSE_GET_ACTION = "GET_COURSE";
   static const String COURSE_ADD_ACTION = "ADD_COURSE";
   static const String COURSE_DELETE = "DELETE_COURSE";
+
+//  Assign
+
+  static const ASSIGN_ROOT = 'http://192.168.0.12/phpBackend/assignments_all.php';
+  static const String ASSIGN_EDIT_ACTION = "EDIT_ASSIGN";
+  static const String ASSIGN_GET_ACTION = "GET_ASSIGN";
+  static const String ASSIGN_ADD_ACTION = "ADD_ASSIGN";
+  static const String ASSIGN_DELETE = "DELETE_ASSIGN";
+
+//  Units
+  static const UNIT_ROOT = 'http://192.168.0.12/phpBackend/units_all.php';
+  static const String UNIT_EDIT_ACTION = "EDIT_UNIT";
+  static const String UNIT_GET_ACTION = "GET_UNIT";
+  static const String UNIT_ADD_ACTION = "ADD_UNIT";
+  static const String UNIT_DELETE = "DELETE_UNIT";
+
+//    Student_Units
+  static const STUDENT_UNIT_ROOT = 'http://192.168.0.12/phpBackend/studentunit_all.php';
+  static const String STUDENT_UNIT_EDIT_ACTION = "EDIT_STUDENT_UNIT";
+  static const String STUDENT_UNIT_GET_ACTION = "GET_STUDENT_UNIT";
+  static const String STUDENT_UNIT_ADD_ACTION = "ADD_STUDENT_UNIT";
+  static const String STUDENT_UNIT_DELETE_ACTION = "DELETE_STUDENT_UNIT";
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

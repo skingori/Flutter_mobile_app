@@ -39,12 +39,7 @@ class _AllCoursesState extends State<AllCourses> {
         backgroundColor: Colors.redAccent,
         title: Text(widget.title),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              getData();
-            },
-          ),IconButton(
+        IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
               Navigator.of(context).push(new MaterialPageRoute(
@@ -102,7 +97,6 @@ class _AllCoursesState extends State<AllCourses> {
                         map['id'] = list[index]['Course_ID'];
                         var url = APIConstants.COURSE_ROOT;
                         http.post(url, body:map);
-                        getData();
                       });
 
                       Scaffold.of(context).showSnackBar(SnackBar(

@@ -146,7 +146,7 @@ class Texts {
   static const String NEW_PASSWORD = "New Password";
   static const String CHANGE_PASSWORD = "CHANGE PASSWORD";
   static const String LOGOUT = "LOGOUT";
-  static const String EMAIL = "Email";
+  static const String EMAIL = "Username";
   static const String NAME = "Name";
   static const String WELCOME_MESSAGE = "Welcome to St.Paul University";
 }

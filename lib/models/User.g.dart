@@ -7,7 +7,6 @@ part of 'User.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => new User(
-    name: json['name'] as String,
     email: json['email'] as String,
     unique_id: json['unique_id'] as String,
     password: json['password'] as String,
@@ -15,7 +14,6 @@ User _$UserFromJson(Map<String, dynamic> json) => new User(
     new_password: json['new_password'] as String);
 
 abstract class _$UserSerializerMixin {
-  String get name;
 
   String get email;
 
@@ -28,7 +26,6 @@ abstract class _$UserSerializerMixin {
   String get new_password;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'name': name,
         'email': email,
         'unique_id': unique_id,
         'password': password,

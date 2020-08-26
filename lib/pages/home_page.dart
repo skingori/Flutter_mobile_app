@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(((user == null) ? "User Name" : user.name)),
+        title: new Text(((user == null) ? "User Name" : user.email)),
         backgroundColor: Colors.redAccent,
       ),
       drawer: new Drawer(
@@ -86,12 +86,12 @@ class _HomePageState extends State<HomePage> {
             new UserAccountsDrawerHeader(
               accountEmail:
                   new Text(((user == null) ? "User Name" : user.email)),
-              accountName: new Text(((user == null) ? "User Name" : user.name)),
+              accountName: new Text(((user == null) ? "User Name" : '')),
               currentAccountPicture: new GestureDetector(
                 child: new CircleAvatar(
                   backgroundColor: Colors.brown.shade800,
                   child:
-                      Text(((user == null) ? "U" : user.name[0].toUpperCase())),
+                      Text(((user == null) ? "U" : user.email[0].toUpperCase())),
                 ),
               ),
               decoration: new BoxDecoration(color: Colors.redAccent),
@@ -125,11 +125,11 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new AllAssignments()));
                 }),
             new Divider(),
-            new ListTile(
-              title: new Text("Change password"),
-              trailing: new Icon(Icons.visibility_off),
-              onTap: () => Navigator.pop(context),
-            ),
+//            new ListTile(
+//              title: new Text("Change password"),
+//              trailing: new Icon(Icons.visibility_off),
+//              onTap: () => Navigator.pop(context),
+//            ),
             new ListTile(
               title: new Text("Logout"),
               trailing: new Icon(Icons.exit_to_app),

@@ -33,7 +33,7 @@ class RegisterPageState extends State<RegisterPage> {
   ProgressDialog progressDialog =
       ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_REGISTER);
 
-  TextEditingController nameController = new TextEditingController(text: "");
+//  TextEditingController nameController = new TextEditingController(text: "");
 
   TextEditingController emailController = new TextEditingController(text: "");
 
@@ -104,7 +104,7 @@ class RegisterPageState extends State<RegisterPage> {
               child: new Column(
                 children: <Widget>[
 //------------------------------------------------------------------------------
-                  _nameContainer(),
+//                  _nameContainer(),
 //------------------------------------------------------------------------------
                   _emailContainer(),
 //------------------------------------------------------------------------------
@@ -121,20 +121,20 @@ class RegisterPageState extends State<RegisterPage> {
   }
 
 //------------------------------------------------------------------------------
-  Widget _nameContainer() {
-    return new Container(
-        child: new TextFormField(
-            controller: nameController,
-            decoration: InputDecoration(
-                suffixIcon: new Icon(
-                  Icons.face,
-                  color: Colors.pink,
-                ),
-                labelText: Texts.NAME,
-                labelStyle: TextStyle(fontSize: 18.0)),
-            keyboardType: TextInputType.text),
-        margin: EdgeInsets.only(bottom: 5.0));
-  }
+//  Widget _nameContainer() {
+//    return new Container(
+//        child: new TextFormField(
+//            controller: nameController,
+//            decoration: InputDecoration(
+//                suffixIcon: new Icon(
+//                  Icons.face,
+//                  color: Colors.pink,
+//                ),
+//                labelText: Texts.NAME,
+//                labelStyle: TextStyle(fontSize: 18.0)),
+//            keyboardType: TextInputType.text),
+//        margin: EdgeInsets.only(bottom: 5.0));
+//  }
 
 //------------------------------------------------------------------------------
   Widget _emailContainer() {
@@ -202,12 +202,12 @@ class RegisterPageState extends State<RegisterPage> {
 
 //------------------------------------------------------------------------------
   void _registerButtonAction() {
-    if (nameController.text == "") {
-      globalKey.currentState.showSnackBar(new SnackBar(
-        content: new Text(SnackBarText.ENTER_NAME),
-      ));
-      return;
-    }
+//    if (nameController.text == "") {
+//      globalKey.currentState.showSnackBar(new SnackBar(
+//        content: new Text(SnackBarText.ENTER_NAME),
+//      ));
+//      return;
+//    }
 
     if (emailController.text == "") {
       globalKey.currentState.showSnackBar(new SnackBar(
@@ -238,13 +238,17 @@ class RegisterPageState extends State<RegisterPage> {
     }
     FocusScope.of(context).requestFocus(new FocusNode());
     progressDialog.showProgress();
-    _registerUser(
-        nameController.text, emailController.text, passwordController.text);
+//    _registerUser(
+//        nameController.text, emailController.text, passwordController.text);
+//  }
+
+  _registerUser(
+      emailController.text, passwordController.text);
   }
 
 //------------------------------------------------------------------------------
-  void _registerUser(String name, String emailId, String password) async {
-    EventObject eventObject = await registerUser(name, emailId, password);
+  void _registerUser(String emailId, String password) async {
+    EventObject eventObject = await registerUser(emailId, password);
     switch (eventObject.id) {
       case EventConstants.USER_REGISTRATION_SUCCESSFUL:
         {

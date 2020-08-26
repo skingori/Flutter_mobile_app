@@ -23,6 +23,7 @@ import 'package:StPaulUniversity/models/ApiResponse.dart';
 import 'package:StPaulUniversity/models/User.dart';
 import 'package:StPaulUniversity/models/base/EventObject.dart';
 import 'package:StPaulUniversity/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,6 +39,8 @@ Future<EventObject> loginUser(String emailId, String password) async {
     final response = await http.post(APIConstants.API_BASE_URL,
         body: json.encode(apiRequest.toJson()),
         encoding: Encoding.getByName(encoding));
+    debugPrint(json.encode(apiRequest.toJson()));
+    debugPrint(response.body);
     if (response != null) {
       if (response.statusCode == APIResponseCode.SC_OK &&
           response.body != null) {
@@ -62,19 +65,20 @@ Future<EventObject> loginUser(String emailId, String password) async {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Future<EventObject> registerUser(
-    String name, String emailId, String password) async {
+Future<EventObject> registerUser(String emailId, String password) async {
   ApiRequest apiRequest = new ApiRequest();
-  User user = new User(name: name, email: emailId, password: password);
+  User user = new User(email: emailId, password: password);
 
   apiRequest.operation = APIOperations.REGISTER;
   apiRequest.user = user;
 
   try {
     final encoding = APIConstants.OCTET_STREAM_ENCODING;
+    debugPrint(json.encode(apiRequest.toJson()));
     final response = await http.post(APIConstants.API_BASE_URL,
         body: json.encode(apiRequest.toJson()),
         encoding: Encoding.getByName(encoding));
+    debugPrint(response.body);
     if (response != null) {
       if (response.statusCode == APIResponseCode.SC_OK &&
           response.body != null) {

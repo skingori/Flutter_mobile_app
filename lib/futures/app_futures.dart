@@ -50,6 +50,8 @@ Future<EventObject> loginUser(String emailId, String password) async {
           return new EventObject(
               id: EventConstants.LOGIN_USER_SUCCESSFUL,
               object: apiResponse.user);
+
+//          debugPrint(apiResponse.user);
         } else {
           return new EventObject(id: EventConstants.LOGIN_USER_UN_SUCCESSFUL);
         }

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:StPaulUniversity/pages/students_page.dart';
 import 'package:flutter/material.dart';
 import 'package:StPaulUniversity/customviews/progress_dialog.dart';
 import 'package:StPaulUniversity/futures/app_futures.dart';
@@ -6,6 +9,7 @@ import 'package:StPaulUniversity/pages/home_page.dart';
 import 'package:StPaulUniversity/pages/register_page.dart';
 import 'package:StPaulUniversity/utils/app_shared_preferences.dart';
 import 'package:StPaulUniversity/utils/constants.dart';
+import 'package:StPaulUniversity/models/User.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -181,15 +185,31 @@ class LoginPageState extends State<LoginPage> {
     switch (eventObject.id) {
       case EventConstants.LOGIN_USER_SUCCESSFUL:
         {
-          setState(() {
-            AppSharedPreferences.setUserLoggedIn(true);
-            AppSharedPreferences.setUserProfile(eventObject.object);
-            globalKey.currentState.showSnackBar(new SnackBar(
-              content: new Text(SnackBarText.LOGIN_SUCCESSFUL),
-            ));
-            progressDialog.hideProgress();
-            _goToHomeScreen();
-          });
+          User user = eventObject.object;
+          if(user.unique_id == "1"){
+            setState(() {
+              AppSharedPreferences.setUserLoggedIn(true);
+              AppSharedPreferences.setUserProfile(eventObject.object);
+              globalKey.currentState.showSnackBar(new SnackBar(
+                content: new Text(SnackBarText.LOGIN_SUCCESSFUL),
+              ));
+              progressDialog.hideProgress();
+              _goToStudentScreen();
+            });
+          }
+          else if(user.unique_id == "2") {
+            setState(() {
+              AppSharedPreferences.setUserLoggedIn(true);
+              AppSharedPreferences.setUserProfile(eventObject.object);
+              globalKey.currentState.showSnackBar(new SnackBar(
+                content: new Text(SnackBarText.LOGIN_SUCCESSFUL),
+              ));
+              progressDialog.hideProgress();
+              _goToHomeScreen();
+            });
+          }else{
+            break;
+          }
         }
         break;
       case EventConstants.LOGIN_USER_UN_SUCCESSFUL:
@@ -220,6 +240,13 @@ class LoginPageState extends State<LoginPage> {
     Navigator.pushReplacement(
       context,
       new MaterialPageRoute(builder: (context) => new HomePage()),
+    );
+  }
+  //------------------------------------------------------------------------------
+  void _goToStudentScreen() {
+    Navigator.pushReplacement(
+      context,
+      new MaterialPageRoute(builder: (context) => new StudentPage()),
     );
   }
 
